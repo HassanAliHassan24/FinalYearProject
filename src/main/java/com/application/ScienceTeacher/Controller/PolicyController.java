@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
+@CrossOrigin
 @RequestMapping("/api/Policy")
 public class PolicyController {
 
@@ -30,17 +31,17 @@ public class PolicyController {
         List<Policy> policies = this.policyService.getAllPolicy();
         return new ResponseEntity<>(policies, HttpStatus.OK);
     }
-    @GetMapping("/getById/{policy_id}")
-    public ResponseEntity<Policy> getPolicyByI(@PathVariable("policy_id")Integer policy_id){
-        Policy policy = this.policyService.getById(policy_id);
+    @GetMapping("/getById/{id}")
+    public ResponseEntity<Policy> getPolicyByI(@PathVariable("id")Integer id){
+        Policy policy = this.policyService.getById(id);
         return new ResponseEntity<>(policy, HttpStatus.OK);
     }
     @Transactional
-    @DeleteMapping("/deletePolicy/{policy_id}")
-    public void deletePolicyById(@PathVariable Integer policy_id){
-        this.policyService.deletePolicyById(policy_id);
+    @DeleteMapping("/deletePolicy/{id}")
+    public void deletePolicyById(@PathVariable Integer id){
+        this.policyService.deletePolicyById(id);
     }
-    @PutMapping("/updatePolicy/{policy_id}")
+    @PutMapping("/updatePolicy/{id}")
     public Policy updatePolicy(@RequestBody Policy policy){
         return this.policyService.updatePolicy(policy);
     }

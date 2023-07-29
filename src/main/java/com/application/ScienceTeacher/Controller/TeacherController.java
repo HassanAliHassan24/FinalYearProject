@@ -22,11 +22,17 @@ public class TeacherController {
 
     @PostMapping("/register")
     public Teacher registerTeacher(@RequestBody Teacher teacher) {
+        if (teacherRepository.existsByuserName(teacher.getUserName())){
+            throw new IllegalArgumentException("Teacher userName already axists");
+        }
         return this.teacherService.registerTeacher(teacher);
 
     }
     @PostMapping("/add")
     public Teacher addTeacher(@RequestBody Teacher teacher) {
+        if (teacherRepository.existsByuserName(teacher.getUserName())){
+            throw new IllegalArgumentException(" Teacher userName already axists");
+        }
         return this.teacherService.addTeacher(teacher);
 
     }
@@ -34,7 +40,6 @@ public class TeacherController {
     @GetMapping("/getAll")
     public ResponseEntity<List<Teacher>> getAllTeacher() {
         List<Teacher> teachers = this.teacherService.getAllTeacher();
-
         return new ResponseEntity<>(teachers, HttpStatus.OK);
     }
     @GetMapping("/getById/{id}")

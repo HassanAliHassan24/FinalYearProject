@@ -23,6 +23,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/auth/login/**", "/auth/register/**").permitAll()
                 .anyRequest().authenticated()
+//                .anyRequest().permitAll()
                 .and()
                 .httpBasic();
 

@@ -20,15 +20,20 @@ public class UserService {
     PasswordEncoder passwordEncoder;
 
     public User registerUser(User user){
+        if (userRepository.existsByuserName(user.getUserName())){
+            throw new IllegalArgumentException("userName already axists");
+        }
         String encPsd = this.passwordEncoder.encode(user.getPassword());
         user.setPassword(encPsd);
-        user.setRoles("ROLE_USER".toUpperCase());
         return this.userRepository.save(user);
 
     }
 
 
     public User addUser(User user){
+        if (userRepository.existsByuserName(user.getUserName())){
+            throw new IllegalArgumentException("userName already axists");
+        }
         String encPsd = this.passwordEncoder.encode(user.getPassword());
         user.setPassword(encPsd);
         return this.userRepository.save(user);
@@ -37,6 +42,7 @@ public class UserService {
 
 
     public List<User> getAllUser(){
+
         return this.userRepository.findAll();
     }
 
@@ -45,6 +51,8 @@ public class UserService {
                 new ResourceNotFoundException("That"+ id+"NotFound"));
     }
 
+
+
     public void deleteUserById(Integer UserId){
         this.userRepository.deleteById(UserId);
     }
@@ -52,8 +60,6 @@ public class UserService {
 
 
     public User updateUser(User user){
-        String encPsd = this.passwordEncoder.encode(user.getPassword());
-        user.setPassword(encPsd);
         User user1 = this.userRepository.findById(user.getId()).orElseThrow();
         user1.setFirstName(user.getFirstName());
         user1.setLastName(user.getLastName());
@@ -63,8 +69,10 @@ public class UserService {
         user1.setGender(user.getGender());
         user1.setPhoneNumber(user.getPhoneNumber());
         user1.setUserName(user.getUserName());
-        user1.setPassword(user.getPassword());
-        user1.setRoles(user.getRoles());
         return this.userRepository.save(user1);
+    }
+
+    public Object findUserById(long id) {
+        return null;
     }
 }

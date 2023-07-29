@@ -21,6 +21,7 @@ public class Teacher extends User{
     private String certificate_released_date;
 
 
+
 //    @OneToMany(mappedBy = "teacher")
 //    private List<Qualification> qualifications;
 

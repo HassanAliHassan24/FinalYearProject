@@ -1,11 +1,10 @@
 package com.application.ScienceTeacher.Repository;
 
-import com.application.ScienceTeacher.Entity.Client;
+import com.application.ScienceTeacher.Entity.Orders;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ClientRepository extends JpaRepository<Client,Integer> {
+public interface OrdersRepository extends JpaRepository <Orders, Long> {
 
-    boolean existsByuserName(String userName);
 }

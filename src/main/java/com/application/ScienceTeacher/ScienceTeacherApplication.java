@@ -18,7 +18,7 @@ public class ScienceTeacherApplication {
 	}
 
 
-	@Bean
+//	@Bean
 public User addAdmin(UserRepository userRepository) {
 	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	User admin = new User();
@@ -36,7 +36,6 @@ public User addAdmin(UserRepository userRepository) {
 	userRepository.save(admin);
 	return admin;
 }
-
 
 
 }

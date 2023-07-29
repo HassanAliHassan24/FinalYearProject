@@ -23,16 +23,16 @@ public class ProgramService {
         return this.programRepository.findAll();
     }
 
-    public Program getById(Integer program_id){
-        return this.programRepository.findById(program_id).orElseThrow(()->
-                new ResourceNotFoundException("That"+program_id+"NotFound"));
+    public Program getById(Integer id){
+        return this.programRepository.findById(id).orElseThrow(()->
+                new ResourceNotFoundException("That"+id+"NotFound"));
     }
 
-    public void deleteProgramById(Integer program_id){
-        this.programRepository.deleteById(program_id);
+    public void deleteProgramById(Integer id){
+        this.programRepository.deleteById(id);
     }
     public Program updateProgram(Program program){
-        Program program1 = this.programRepository.findById(program.getProgram_id()).orElseThrow(null);
+        Program program1 = this.programRepository.findById(program.getId()).orElseThrow(null);
         program1.setProgram_name(program.getProgram_name());
         program1.setDuration(program.getDuration());
         program1.setPrerequisite(program.getPrerequisite());

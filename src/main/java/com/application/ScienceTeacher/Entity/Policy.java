@@ -16,7 +16,7 @@ public class Policy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int policy_id;
+    private int id;
     private String policy_name;
     private String policy_description;
 }

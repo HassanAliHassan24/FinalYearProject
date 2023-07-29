@@ -25,11 +25,17 @@ public class ClientController {
 
     @PostMapping("/register")
     public Client registerClient(@RequestBody Client client){
+        if (clientRepository.existsByuserName(client.getUserName())){
+            throw new IllegalArgumentException("Client userName already axists");
+        }
 //        LocalDate dob = client.getDob();
         return this.clientService.registerClient(client);
     }
     @PostMapping("/add")
     public Client addClient(@RequestBody Client client){
+        if (clientRepository.existsByuserName(client.getUserName())){
+            throw new IllegalArgumentException("Client userName already axists");
+        }
 //        LocalDate dob = client.getDob();
         return this.clientService.addClient(client);
     }
@@ -50,7 +56,7 @@ public class ClientController {
     public void deleteClientById(@PathVariable Integer id){
         this.clientService.deleteClientById(id);
     }
-    @PutMapping("updateClient/{id}")
+    @PutMapping("/updateClient/{id}")
     public Client updateClient(@RequestBody Client client){
         return this.clientService.updateClient(client);
     }

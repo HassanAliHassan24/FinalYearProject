@@ -24,6 +24,9 @@ public class TeacherService {
     public UserRepository userRepository;
 
     public Teacher registerTeacher(Teacher teacher) {
+        if (userRepository.existsByuserName(teacher.getUserName())){
+            throw new IllegalArgumentException(" Teacher userName already axists ");
+        }
         String encPsd = this.passwordEncoder.encode(teacher.getPassword());
         teacher.setPassword(encPsd);
         teacher.setRoles("ROLE_TEACHER".toUpperCase());
@@ -32,6 +35,9 @@ public class TeacherService {
     }
 
     public Teacher addTeacher(Teacher teacher) {
+        if (teacherRepository.existsByuserName(teacher.getUserName())){
+            throw new IllegalArgumentException(" Teacher userName already axists ");
+        }
         String encPsd = this.passwordEncoder.encode(teacher.getPassword());
         teacher.setPassword(encPsd);
         return this.teacherRepository.save(teacher);
@@ -66,7 +72,7 @@ public class TeacherService {
         teacher1.setAddress(teacher.getAddress());
         teacher1.setPhoneNumber(teacher.getPhoneNumber());
         teacher1.setEmail(teacher.getEmail());
-        teacher1.setRoles(teacher.getRoles());
+        teacher.setRoles("ROLE_TEACHER".toUpperCase());
         teacher1.setEducation_level(teacher.getEducation_level());
 
         return this.teacherRepository.save(teacher1);

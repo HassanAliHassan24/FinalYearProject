@@ -17,7 +17,7 @@ public class Program {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int program_id;
+    private int id;
     private String program_name;
     private  String duration;
     private String prerequisite;
